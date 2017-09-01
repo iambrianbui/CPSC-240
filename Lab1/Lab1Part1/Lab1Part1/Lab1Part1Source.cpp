@@ -26,18 +26,18 @@ int main() {
 	displayMenu();
 
 	//  drinks
-	cout << "How many drinks?  ";
+	cout << "\tHow many drinks?  ";
 	cin >> drinksAmount;
 	drinksAmount = calculateIndividual(drinksAmount, 2);
 
 	//  sandwiches
-	cout << "How many sandwiches?  ";
+	cout << "\tHow many sandwiches?  ";
 	cin >> sandwichAmount;
 	sandwichAmount = calculateIndividual(sandwichAmount, 4);
 
 	finalAmount = finalBill(drinksAmount, sandwichAmount);
 
-	cout << "\tYour total bill is:  $" << finalAmount << endl;
+	cout << "\t\tYour total bill is:  $" << finalAmount << endl;
 
 	system("pause");
 	return 0;
