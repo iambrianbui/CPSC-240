@@ -1,0 +1,5 @@
+﻿  Source.cpp
+d:\visual studio\projects\cpsc 240 assignment 2 part 2\cpsc 240 assignment 2 part 2\source.cpp(9): warning C4101: 'rectArea': unreferenced local variable
+d:\visual studio\projects\cpsc 240 assignment 2 part 2\cpsc 240 assignment 2 part 2\source.cpp(9): warning C4101: 'rectPeri': unreferenced local variable
+d:\visual studio\projects\cpsc 240 assignment 2 part 2\cpsc 240 assignment 2 part 2\source.cpp(8): warning C4101: 'triArea': unreferenced local variable
+d:\visual studio\projects\cpsc 240 assignment 2 part 2\cpsc 240 assignment 2 part 2\source.cpp(48): error C2400: inline assembler syntax error in 'second operand'; found 'newline'
