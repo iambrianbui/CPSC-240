@@ -1,0 +1,48 @@
+/*
+CPSC240
+Created by:  Bui, Brian and Liao, Joey
+Created on:  5 September 2017
+Last edited:  5 September 2017
+This program will display the sum of a 3 digit number.
+*/
+
+#include<iostream>
+using namespace std;
+
+int calculate(int);
+
+
+int main() {
+
+	int number;
+
+	cout << "Please enter a three digit number:  ";
+	cin >> number;
+	cout << "The sum of the digits is:  " << calculate(number) << endl;
+
+
+}
+
+int calculate(int number) {
+	const int hund = 100, ten = 10;
+	int hundDigit, tenDigit, oneDigit;
+	_asm {
+		//  hundred's place
+			mov			EAX, number
+			cdq
+			idiv		hund
+			mov			hundDigit, EAX
+			mov			tenDigit, EDX
+
+
+		//  ten's and one's place
+			mov			EAX, tenDigit
+			cdq
+			idiv		ten 
+			mov			tenDigit, EAX
+			mov			oneDigit, EDX 
+	}
+
+
+	return hundDigit + tenDigit + oneDigit;
+}
