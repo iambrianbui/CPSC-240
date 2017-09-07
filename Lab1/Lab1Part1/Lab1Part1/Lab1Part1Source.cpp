@@ -15,32 +15,39 @@ the price of the bill.
 #include<string>
 using namespace std;
 
+void inter(int);  //  prompt interface and set up loop
 void displayMenu();  //  display the menu
 short calculateIndividual(short, short);  //  function to calculate the individual item
-short finalBill(short, short);
+short finalBill(short, short);  //  add the shorts
 
 
 int main() {
 
-	short drinksAmount, sandwichAmount, finalAmount;
-	displayMenu();
-
-	//  drinks
-	cout << "\tHow many drinks?  ";
-	cin >> drinksAmount;
-	drinksAmount = calculateIndividual(drinksAmount, 2);
-
-	//  sandwiches
-	cout << "\tHow many sandwiches?  ";
-	cin >> sandwichAmount;
-	sandwichAmount = calculateIndividual(sandwichAmount, 4);
-
-	finalAmount = finalBill(drinksAmount, sandwichAmount);
-
-	cout << "\t\tYour total bill is:  $" << finalAmount << endl;
-
+	inter(1);  //  run interface
 	system("pause");
 	return 0;
+}
+
+
+void inter(int x) {
+	if (x != 0) {  //  if x is not 0, run program
+		short drinksAmount, sandwichAmount, finalAmount;  //  drink amount, sandwich amount, final bill
+		displayMenu();  //  display the menu
+
+		//  drinks
+		cout << "\tHow many drinks?  ";
+		cin >> drinksAmount;
+		drinksAmount = calculateIndividual(drinksAmount, 2);
+
+		//  sandwiches
+		cout << "\tHow many sandwiches?  ";
+		cin >> sandwichAmount;
+		sandwichAmount = calculateIndividual(sandwichAmount, 4);
+
+		finalAmount = finalBill(drinksAmount, sandwichAmount);
+
+		cout << "\t\tYour total bill is:  $" << finalAmount << endl;
+	}  //  if x is 0, exit
 }
 
 void displayMenu() {
@@ -52,23 +59,23 @@ void displayMenu() {
 }
 
 short calculateIndividual(short amt, short price) {
-	short c;
+	short c;  //  proxy memory
 	//  enter assembly
 	_asm {
-		mov		AX, price
-		imul	amt
-		mov		c, AX 
+		mov		AX, price				;  AX = price
+		imul	amt						;  multiply AX by amt  
+		mov		c, AX					;  c = AX  
 	}
-	return c;
+	return c;  
 }
 
 short finalBill(short drink, short sandwich) {
-	short t;
+	short t;  //  proxy memory
 	//  enter assembly
 	_asm {
-		mov		BX, drink
-		add		BX, sandwich  
-		mov		t, BX 
+		mov		BX, drink				;  BX = drink 
+		add		BX, sandwich			;  add BX and sandwich  
+		mov		t, BX					;  t = BX + sandwich
 	}
 	return t;
 }
