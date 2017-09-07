@@ -1,5 +1,3 @@
 ﻿  Source.cpp
-c:\users\joeyster\documents\github\cpsc-240\lab1\lab1part2\cpsc 240 assignment 2 part 2\source.cpp(9): warning C4101: 'rectArea': unreferenced local variable
-c:\users\joeyster\documents\github\cpsc-240\lab1\lab1part2\cpsc 240 assignment 2 part 2\source.cpp(9): warning C4101: 'rectPeri': unreferenced local variable
-c:\users\joeyster\documents\github\cpsc-240\lab1\lab1part2\cpsc 240 assignment 2 part 2\source.cpp(8): warning C4101: 'triArea': unreferenced local variable
-c:\users\joeyster\documents\github\cpsc-240\lab1\lab1part2\cpsc 240 assignment 2 part 2\source.cpp(48): error C2400: inline assembler syntax error in 'second operand'; found 'newline'
+  CPSC 240 Assignment 2 Part 2.vcxproj -> C:\Users\Joeyster\Documents\GitHub\CPSC-240\Lab1\Lab1Part2\Debug\CPSC 240 Assignment 2 Part 2.exe
+  CPSC 240 Assignment 2 Part 2.vcxproj -> C:\Users\Joeyster\Documents\GitHub\CPSC-240\Lab1\Lab1Part2\Debug\CPSC 240 Assignment 2 Part 2.pdb (Full PDB)
