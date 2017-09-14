@@ -1,3 +1,13 @@
+/*
+CPSC240
+Created by:  Bui, Brian and Liao, Joey
+Created on:  12 September 2017
+Last edited:  13 September 2017
+This program will analyze a sentence given by the user and dissect the amount of uppercase and lowercase letters.
+
+The program will also utilize comparisons and jumps as substitutes for conditional statements.
+*/
+
 #include<iostream>
 using namespace std;
 
@@ -18,51 +28,54 @@ int main() {
 
 }
 
-
+//  prompt user for sentence
 void askForSent() {
 	cout << "Enter a sentence:  :" << endl;
 
 }
 
+
+//  read the next character
 void readChar() {
 	cin.get(c);
 }
 
 void processChar() {
 	_asm {
-			call	askForSent
+			call	askForSent				;  ask for character first
 			call	readChar
-	WhileLoop: 
+	WhileLoop:								;  start while loop
 			cmp		c, '\n'
 			je		EndWhile 
 			cmp		c, 'Z'
-			jle		LessThanZ			;  c < Z
+			jle		LessThanZ				;  c < Z
 			cmp		c, 'z'
 			jle		LessThanLowerz			;  c < z 
 
-	ReadLoop: 
+	ReadLoop:								;  go here after done with letter
 			call	readChar 
 			jmp		WhileLoop			
 
 	LessThanZ:
 			cmp		c, 'A'
-			jge		CapitalLetter		;  c < A 
-			jmp		ReadLoop			;  failed
+			jge		CapitalLetter			;  c < A 
+			jmp		ReadLoop				;  failed
 
 	LessThanLowerz:
 			cmp		c, 'a'
 			jge		LowerLetter
 			jmp		ReadLoop 
 
-	CapitalLetter:
+	CapitalLetter:							;  increase upper counter
+
 			inc		upper 
 			jmp		ReadLoop 
 
-	LowerLetter:
+	LowerLetter:							;  increase lower counter
 			inc		lower 
 			jmp		ReadLoop
 
-	EndWhile: 
+	EndWhile:								;  done
 	}
 }
 
