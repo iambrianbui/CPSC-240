@@ -98,3 +98,10 @@ void loop(int num) {
 void printStar() {
 	cout << "* ";
 }
+
+/*-------------------------------------------------
+Output:
+Enter a string of votes: ynnyynyyyy
+No. of YES Votes = 7 = * * * * * * * 
+No. of NO Votes = 3 = * * * 
+-------------------------------------------------*/
