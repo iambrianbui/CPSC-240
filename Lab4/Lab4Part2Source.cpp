@@ -1,3 +1,12 @@
+/*
+CPSC240
+Created by:  Bui, Brian and Liao, Joey
+Created on:  19 September 2017
+Last edited:  19 September 2017
+This program will get a sentence and print each character one by one.
+If it's a vowel, it will be uppercased.
+*/
+
 #include <iostream>
 using namespace std;
 
