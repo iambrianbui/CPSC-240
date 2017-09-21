@@ -44,20 +44,20 @@ void checkChar() {
 
 void process() {
 	_asm {
-				call	checkChar
+				call	checkChar			;  initial call
 	WhileLoop:
 				cmp		c, '\n'
-				je		DoneWhile 
+				je		DoneWhile 		;  finish the loop
 
 				cmp		c, 'y'
-				je		IncYes
+				je		IncYes			;  go to yes to count yes vote
 
 				cmp		c, 'n'
-				je		IncNo
+				je		IncNo			;  go to no to count no vote
 
 	ReadNext:
-				call	checkChar
-				jmp		WhileLoop
+				call	checkChar			;  check the next character 
+				jmp		WhileLoop 		;  back to the top
 
 	IncYes:
 				inc		yesVote
@@ -82,9 +82,9 @@ void display() {
 
 void loop(int num) {
 	_asm {
-				mov		EBX, 0
-	ForLoop:
-				cmp		EBX, num
+				mov		EBX, 0			;  EBX NOT EAX!!!! EAX GETS OVERWRITTEN!
+	ForLoop:							;  for loop
+				cmp		EBX, num		
 				jge		DoneLoop
 				call	printStar
 				inc		EBX
