@@ -43,43 +43,48 @@ void isWrong() {
 }
 
 void addEquation() {
-	num1 = rand()%99+1;
-	num2 = rand()%99+1;
+	num1 = rand() % 99 + 1;
+	num2 = rand() % 99 + 1;
 	cout << "    " << num1 << " + " << num2 << " ? ";
 
 	_asm {
-		mov		 eax, num1      
-		add		 eax, num2
+		mov		 ebx, num1			
+		add		 ebx, num2
 		call	 userAnswer
-		cmp		 eax, answer
+		cmp		 ebx, answer
 		Je		 correct
 		Jmp		 wrong
-	correct:	
+		correct :
 		inc		 correctCount
-		call	 isCorrect
-	wrong:
+			call	 isCorrect
+			jmp		 End
+			wrong :
 		inc		 wrongCount
-		call	 isWrong
+			call	 isWrong
+		End:  
+
 	}
 }
 
 void minusEquation() {
-	num1 = rand()%99+1;
-	num2 = rand()%99+1;
+	num1 = rand() % 99 + 1;
+	num2 = rand() % 99 + 1;
 	cout << "    " << num1 << " - " << num2 << " ? ";
 	_asm {
-		mov		 eax, num1
-		sub		 eax, num2
+		mov		 ebx, num1
+		sub		 ebx, num2
 		call	 userAnswer
-		cmp		 answer, eax
+		cmp		 answer, ebx
 		Je		 correct
 		Jmp		 wrong
-	correct:
+		correct :
 		inc		 correctCount
-		call	 isCorrect
-	wrong:
+			call	 isCorrect
+			jmp		 End  
+			wrong :
 		inc		 wrongCount
-		call	 isWrong
+			call	 isWrong
+		End :
 	}
 
 }
@@ -101,48 +106,48 @@ int main() {
 	_asm {
 	beginning:
 		call	askPractice
-		cmp		choice, 'a'
-		Je		addition
-		cmp		choice, 'b'
-		Je		subtraction
-	addition :
+			cmp		choice, 'a'
+			Je		addition
+			cmp		choice, 'b'
+			Je		subtraction
+			addition :
 		call	 addEquation
-		call	 askContinue
-		cmp		 continueYesNo, 'Y'  ;go back to addition when continuing, not case sensitive
-		Je		 addition
-		cmp		 continueYesNo, 'y'
-		Je		 addition
-		cmp		 continueYesNo, 'N'  ;go to isDone to see if want to finish, not case sensitive
-		Je		 isDone
-		cmp		 continueYesNo, 'n'
-		Je		 isDone
-	subtraction :
+			call	 askContinue
+			cmp		 continueYesNo, 'Y'; go back to addition when continuing, not case sensitive
+			Je		 addition
+			cmp		 continueYesNo, 'y'
+			Je		 addition
+			cmp		 continueYesNo, 'N'; go to isDone to see if want to finish, not case sensitive
+			Je		 isDone
+			cmp		 continueYesNo, 'n'
+			Je		 isDone
+			subtraction :
 		call	 minusEquation
-		call	 askContinue
-		cmp		 continueYesNo, 'Y'  ;go back to subtraction when continuing, not case sensitive
-		Je		 subtraction
-		cmp		 continueYesNo, 'y'
-		Je		 subtraction
-		cmp		 continueYesNo, 'N'  ;go to isDone to see if want to finish, not case sensitive
-		Je		 isDone
-		cmp		 continueYesNo, 'n'
-		Je		 isDone
+			call	 askContinue
+			cmp		 continueYesNo, 'Y'; go back to subtraction when continuing, not case sensitive
+			Je		 subtraction
+			cmp		 continueYesNo, 'y'
+			Je		 subtraction
+			cmp		 continueYesNo, 'N'; go to isDone to see if want to finish, not case sensitive
+			Je		 isDone
+			cmp		 continueYesNo, 'n'
+			Je		 isDone
 
-	isDone:	
-		call	 showCount			 ;shows how many correct and wrong answers
-		mov		 correctCount, 0	 ;reset correctCount in case user wants to continue
-		mov		 wrongCount, 0		 ;reset wrongCount in case user wants to continue
-		call	 askDone
-		cmp		 doneYesNo, 'Y'		 ;go to ending and end program, not case sensitive 
-		Je		 ending
-		cmp		 doneYesNo, 'y'
-		Je		 ending
-		cmp		 doneYesNo, 'N'		 ;go back to beginning to practice more, not case sensitive
-		Je		 beginning
-		cmp		 doneYesNo, 'n'
-		Je		 beginning
+			isDone :
+		call	 showCount; shows how many correct and wrong answers
+			mov		 correctCount, 0; reset correctCount in case user wants to continue
+			mov		 wrongCount, 0; reset wrongCount in case user wants to continue
+			call	 askDone
+			cmp		 doneYesNo, 'Y'; go to ending and end program, not case sensitive
+			Je		 ending
+			cmp		 doneYesNo, 'y'
+			Je		 ending
+			cmp		 doneYesNo, 'N'; go back to beginning to practice more, not case sensitive
+			Je		 beginning
+			cmp		 doneYesNo, 'n'
+			Je		 beginning
 
-	ending:
+			ending :
 		call	goodbye
 	}
 
@@ -155,26 +160,26 @@ Output:
 ------Practice Addition & Subtraction------
 a. Practice Addition
 b. Practice Subtraction
-   Enter your choice(a/b): a
-    42 + 54 ? 55
-     WRONG
-     Continue(y/n)?: y
-    98 + 68 ? 75
-     WRONG
-     Continue(y/n)?: N
-    No. of CORRECT answers = 0
-    No. of WRONG answers = 2
-  Are you done(y/n)?: n
-   Enter your choice(a/b): b
-    63 - 83 ? 12
-     WRONG
-     Continue(y/n)?: y
-    94 - 55 ? 29
-     WRONG
-     Continue(y/n)?: n
-    No. of CORRECT answers = 0
-    No. of WRONG answers = 2
-  Are you done(y/n)?: Y
-    Have a nice day!
+Enter your choice(a/b): a
+42 + 54 ? 55
+WRONG
+Continue(y/n)?: y
+98 + 68 ? 75
+WRONG
+Continue(y/n)?: N
+No. of CORRECT answers = 0
+No. of WRONG answers = 2
+Are you done(y/n)?: n
+Enter your choice(a/b): b
+63 - 83 ? 12
+WRONG
+Continue(y/n)?: y
+94 - 55 ? 29
+WRONG
+Continue(y/n)?: n
+No. of CORRECT answers = 0
+No. of WRONG answers = 2
+Are you done(y/n)?: Y
+Have a nice day!
 Press any key to continue . . .
 ------------------------------------------*/
