@@ -48,21 +48,20 @@ void addEquation() {
 	cout << "    " << num1 << " + " << num2 << " ? ";
 
 	_asm {
-		mov		 ebx, num1			
-		add		 ebx, num2
-		call	 userAnswer
-		cmp		 ebx, answer
-		Je		 correct
-		Jmp		 wrong
-		correct :
-		inc		 correctCount
+			mov		 ebx, num1			;ebx = num1
+			add		 ebx, num2			;ebx = num1 + num2
+			call	 userAnswer
+			cmp		 ebx, answer		;ebx == user's answer
+			Je		 correct			;if same, go correct
+			Jmp		 wrong				;if not same, go to wrong
+	correct :
+			inc		 correctCount		;correctCount++
 			call	 isCorrect
 			jmp		 End
-			wrong :
-		inc		 wrongCount
+	wrong :
+			inc		 wrongCount			;wrongCount++
 			call	 isWrong
-		End:  
-
+	End:  
 	}
 }
 
@@ -71,20 +70,20 @@ void minusEquation() {
 	num2 = rand() % 99 + 1;
 	cout << "    " << num1 << " - " << num2 << " ? ";
 	_asm {
-		mov		 ebx, num1
-		sub		 ebx, num2
-		call	 userAnswer
-		cmp		 answer, ebx
-		Je		 correct
-		Jmp		 wrong
-		correct :
-		inc		 correctCount
+			mov		 ebx, num1			;ebx = num1
+			sub		 ebx, num2			;ebx = num1 - num2
+			call	 userAnswer
+			cmp		 answer, ebx		;ebx == user's answer
+			Je		 correct			;if same, go correct
+			Jmp		 wrong				;if not same, go to wrong
+	correct :
+			inc		 correctCount		;correctCount++
 			call	 isCorrect
 			jmp		 End  
-			wrong :
-		inc		 wrongCount
+	wrong :
+			inc		 wrongCount			;wrongCount++
 			call	 isWrong
-		End :
+	End :
 	}
 
 }
@@ -105,13 +104,13 @@ int main() {
 
 	_asm {
 	beginning:
-		call	askPractice
-			cmp		choice, 'a'
-			Je		addition
-			cmp		choice, 'b'
-			Je		subtraction
-			addition :
-		call	 addEquation
+			call     askPractice
+			cmp	     choice, 'a'
+			Je	     addition
+			cmp	     choice, 'b'
+			Je	     subtraction
+	addition :
+			call	 addEquation
 			call	 askContinue
 			cmp		 continueYesNo, 'Y'; go back to addition when continuing, not case sensitive
 			Je		 addition
@@ -121,8 +120,8 @@ int main() {
 			Je		 isDone
 			cmp		 continueYesNo, 'n'
 			Je		 isDone
-			subtraction :
-		call	 minusEquation
+	subtraction :
+			call	 minusEquation
 			call	 askContinue
 			cmp		 continueYesNo, 'Y'; go back to subtraction when continuing, not case sensitive
 			Je		 subtraction
@@ -133,8 +132,8 @@ int main() {
 			cmp		 continueYesNo, 'n'
 			Je		 isDone
 
-			isDone :
-		call	 showCount; shows how many correct and wrong answers
+	isDone :
+			call	 showCount; shows how many correct and wrong answers
 			mov		 correctCount, 0; reset correctCount in case user wants to continue
 			mov		 wrongCount, 0; reset wrongCount in case user wants to continue
 			call	 askDone
@@ -147,7 +146,7 @@ int main() {
 			cmp		 doneYesNo, 'n'
 			Je		 beginning
 
-			ending :
+	ending :
 		call	goodbye
 	}
 
@@ -160,26 +159,26 @@ Output:
 ------Practice Addition & Subtraction------
 a. Practice Addition
 b. Practice Subtraction
-Enter your choice(a/b): a
-42 + 54 ? 55
-WRONG
-Continue(y/n)?: y
-98 + 68 ? 75
-WRONG
-Continue(y/n)?: N
-No. of CORRECT answers = 0
-No. of WRONG answers = 2
-Are you done(y/n)?: n
-Enter your choice(a/b): b
-63 - 83 ? 12
-WRONG
-Continue(y/n)?: y
-94 - 55 ? 29
-WRONG
-Continue(y/n)?: n
-No. of CORRECT answers = 0
-No. of WRONG answers = 2
-Are you done(y/n)?: Y
-Have a nice day!
+   Enter your choice(a/b): a
+    42 + 54 ? 96
+     CORRECT
+     Continue(y/n)?: y
+    98 + 68 ? 15
+     WRONG
+     Continue(y/n)?: N
+    No. of CORRECT answers = 1
+    No. of WRONG answers = 1
+  Are you done(y/n)?: n
+   Enter your choice(a/b): b
+    63 - 83 ? 14
+     WRONG
+     Continue(y/n)?: y
+    94 - 55 ? 66
+     WRONG
+     Continue(y/n)?: n
+    No. of CORRECT answers = 0
+    No. of WRONG answers = 2
+  Are you done(y/n)?: Y
+    Have a nice day!
 Press any key to continue . . .
 ------------------------------------------*/
