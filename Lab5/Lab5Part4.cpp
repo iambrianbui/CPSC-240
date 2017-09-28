@@ -104,3 +104,8 @@ void displayStop() {
 	proxy = 1 +  thisOne;
 	cout << proxy << " ";
 }
+/*--------------Output-----------------------------
+AX = 0110 0100 1110 0000
+Elevator will stop at floors no. 6 7 8 11 14 15
+Press any key to continue . . .
+---------------------------------------------------*/
