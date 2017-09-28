@@ -133,3 +133,10 @@ void displayD() {
 	}
 	cout << endl;
 }
+
+/*-----------------Output-------------------
+AX = 0110 1010 0010 1111
+9 sprinklers are ON.
+Defective sprinklers:  16 13 11 9 8 7 5
+Press any key to continue . . .
+-------------------------------------------*/
