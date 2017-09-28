@@ -11,7 +11,7 @@ given a hexadecimal number.
 using namespace std;
 
 unsigned short moment = 0x6A2F;
-int amountofOn = 0;
+int amountofOn = 1;
 int defective;
 
 void convertToBinary();
@@ -48,33 +48,31 @@ void convertToBinary() {
 }
 
 void checkOnSprink() {
-	unsigned short x;
 	_asm {
-		mov		BX, moment
-		mov		ECX, amountofOn
-
-		mov		EBX, 0
+		mov		AX, 0x6A2F
+		mov		EBX, 0					;  index  
 
 	ForLoop:
 		cmp		EBX, 15
 		jge		DoneLoop				;  finish loop
 
+		mov		CX, 0xF000
+		and		CX, AX 
+		shr		CX, 15
+		cmp		CX, 1
+		je		IsOn
 
-		mov		x, 0xF000
-		and		x, BX 
-h		je		IsWorking
+		jmp		ShiftLeft
 
-		mov		EBX, defective 
-		call	displayDefective
-		jmp    ShiftLoop
 
-	IsWorking:  
+	IsOn:  
 		inc		amountofOn
 
-	ShiftLoop:
-		shl		BX, 1
-		inc		EBX
+	ShiftLeft:
+		inc		EBX 
+		shl		AX, 1
 		jmp		ForLoop
+
 
 	DoneLoop: 
 	}
