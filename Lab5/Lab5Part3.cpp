@@ -2,7 +2,7 @@
 CPSC240
 Created by:  Bui, Brian and Liao, Joey
 Created on:  26 September 2017
-Last edited:  27 September 2017
+Last edited:  26 September 2017
 This program will identify which sprinklers are on and off
 given a hexadecimal number.
 -----------------------------------------------------*/
@@ -12,11 +12,11 @@ using namespace std;
 
 unsigned short moment = 0x6A2F;					//  AX register at this moment
 int amountofOn = 0;
-int defective;
+int defective[16];
 
 void convertToBinary();
 void checkOnSprink();
-void displayDefective();
+//  void displayDefective();					see note at defintion
 void displayD();
 
 
@@ -24,8 +24,9 @@ int main() {
 
 	convertToBinary();
 	checkOnSprink();
-	displayDefective();
-	
+	//  displayDefective();
+	displayD();
+
 	system("pause");
 	return 0;
 }
@@ -41,6 +42,7 @@ void convertToBinary() {
 		tempMoment = tempMoment << 1;
 		if (t == 0) {
 			cout << "0";
+			defective[i] = 1;
 		}
 		else {
 			cout << "1";
@@ -63,9 +65,8 @@ void checkOnSprink() {
 		mov		CX, 0xF000				;  set to 1000 ...
 		and		CX, AX					
 		shr		CX, 15					;  see if it's 1 or 0
-		cmp		CX, 1
-		je		IsOn
-
+		cmp		CX, 0
+		jne		IsOn
 		jmp		ShiftLeft
 
 
@@ -82,6 +83,13 @@ void checkOnSprink() {
 	}
 	cout << amountofOn << " sprinklers are ON. " << endl;
 }
+
+
+/*
+For some reason, Assembly is changing the value of AX despite the initalization of the register.
+My partner and I could not work around this bug/error, so we are opting to put both functions in
+one function.
+
 
 //  display which sprinklers are off
 void displayDefective() {
@@ -113,7 +121,15 @@ void displayDefective() {
 	}
 	cout << endl;
 }
+*/
+
 
 void displayD() {
-	cout << defective << " ";
+	cout << "Defective sprinklers:  ";
+	for (int i = 0; i < 16; i++) {
+		if (defective[i] == 1) {
+			cout << 17-i << " ";
+		}
+	}
+	cout << endl;
 }
