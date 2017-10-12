@@ -16,9 +16,9 @@ float totalBill, amtDrink, amtSand;
 int sandChoice;
 char drinkChoice;
 
-void displayMenu();
-void prompt();
-void calculate();
+void displayMenu();					//  display the menu 
+void prompt();						//  update globals 
+void calculate();					//  actual assembly
 
 int main() {
 
@@ -71,13 +71,13 @@ void calculate() {
 			jmp		DrinkDone
 
 		SodaDrink :
-			fld		soda 
+			fld		soda 					;  load soda
 
 		DrinkDone :
 			fmul 
-			fstp	amtDrink
+			fstp	amtDrink					;  pop
 
-			fld		amtSand
+			fld		amtSand					;  load
 			cmp		sandChoice, 10
 			je		Sand10
 
@@ -85,7 +85,7 @@ void calculate() {
 			jmp		SandDone
 
 		Sand10 :
-			fld		 ten
+			fld		 ten					
 
 		SandDone :
 			fmul 
