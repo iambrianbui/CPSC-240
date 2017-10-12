@@ -9,50 +9,69 @@ This program will calculate a quadratic formula using assembly.
 */
 
 #include<iostream>
+#include<iomanip>
 using namespace std;
 
+float a, b, c, inside, X1, X2;
+float zero = 0, two = 2, four = 4, bottom;
 
-void prompt();
-void answer(float, float, float);
-float positiveRoots(float,float,float);
-
-int main() {
-
-	prompt();
-	system("pause");
-	return 0;
-}
-
-void prompt() {
-	float a, b, c;
-	cout << "To see the two real roots of ax^2 + bx + c = 0, \nEnter the a,b, and c values:  " << endl;
-	cin >> a >> b >> c;
-	answer(a, b, c);
-}
-
-void answer(float a, float b, float c) {
-	float x1, x2;
-	cout << "The answers are:  " << endl;
-	x1 = positiveRoots(a,b,c);
-	cout << x1 << endl;
-}
-
-float positiveRoots(float a, float b, float c) {
-	float ans = 0;
-	float two = 2, four = 4;
+void insideSqrt() {
 	_asm {
-		fld			b
-		fld			b
-		fmul		
-		fld			four
-		fld			a 
-		fld			c
-		fmul 
+		fld b
+		fld b
+		fmul
+		fld four
+		fld a 
+		fld c
+		fmul
 		fmul
 		fsub
-		//fsqrt
-		fstp		ans
+		fsqrt
+		fstp inside
 	}
+}
 
-	return ans;
+void calcX1() {
+	_asm {
+		fld zero
+		fld b
+		fsub
+		fld inside
+		fadd 
+		fld two 
+		fld a
+		fmul
+		fdiv
+		fstp X1
+	}
+}
+
+void calcX2() {
+	_asm {
+		fld zero
+		fld b
+		fsub
+		fld inside
+		fsub 
+		fld two 
+		fld a
+		fmul
+		fdiv
+		fstp X2
+	}
+}
+
+int main() {
+	cout << "To see the two real roots of ax^2 + bx + c = 0, \nEnter the a,b, and c values: ";
+	cin >> a >> b >> c;
+	
+	insideSqrt();
+	calcX1();
+	calcX2();
+
+	cout << fixed << showpoint << setprecision(2);
+
+	cout << "\tX1 = " << X1 << "\tX2 = " << X2 << endl;
+	system("pause");
+	return 0;
 }
