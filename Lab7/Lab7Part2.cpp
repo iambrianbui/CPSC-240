@@ -13,12 +13,12 @@ This program will calculate a quadratic formula using assembly.
 using namespace std;
 
 float a, b, c, inside, X1, X2;
-float zero = 0, two = 2, four = 4, bottom;
+float zero = 0, two = 2, four = 4;
 
 void insideSqrt() {
 	_asm {
 		fld b
-		fld b
+		fld b              ;postfix = bb*(four)ac**-
 		fmul
 		fld four
 		fld a 
@@ -36,7 +36,7 @@ void calcX1() {
 		fld zero
 		fld b
 		fsub
-		fld inside
+		fld inside         ;postfix = 0b-(inside)+(two)a*/
 		fadd 
 		fld two 
 		fld a
@@ -50,7 +50,7 @@ void calcX2() {
 	_asm {
 		fld zero
 		fld b
-		fsub
+		fsub				;postfix = 0b-(inside)-(two)a*/
 		fld inside
 		fsub 
 		fld two 
